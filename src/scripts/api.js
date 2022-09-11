@@ -111,6 +111,16 @@ export class Api {
         return searchResult
     }
 
+    static async getEmpresaIdByName(nomeEmpresa) {
+        const empresa = await this.getEmpresaByName(nomeEmpresa)
+
+        if(empresa == null) {
+            return null
+        } else {
+            return empresa.uuid
+        }
+    }
+
     static async getSetores() {
         const url = this.baseUrl + "sectors"
 
@@ -156,28 +166,33 @@ export class Api {
         return sectorId
     }
 
-    static async getDepartamentos(empresaId) {
+    static async getDepartamentos(data) {
+        const empresaId = await this.getEmpresaIdByName(data.empresaName)
         const url = this.baseUrl + "departments/" + empresaId
+        let returnDepartamento = null
 
-        return await fetch(url,
+        const response = await fetch(url,
             {
                 method: "GET",
                 headers: this.headers
             })
-            .then(res => {
-                if (res.status == 200) {
-                    return res
-                } else {
-                    return null
-                }
-            })
-            .then(res => {
-                if (res) {
-                    return res.json()
-                } else {
-                    return null
-                }
-            })
+            .then(res => res.json())
+        
+        returnDepartamento = response
+        
+        if (returnDepartamento && Array.isArray(response)) {
+            if(data.name) {
+                response.forEach(departamento => {
+                    if(departamento.name == data.name) {
+                        returnDepartamento = departamento
+                    }
+                })
+            }
+
+            return returnDepartamento
+        }
+
+        return returnDepartamento
     }
 
     static async cadastrarEmpresa(data) {
@@ -196,6 +211,29 @@ export class Api {
             })
             .then(res => res.json())
         
+        if (responseStatusCode == 201) {
+            window.location.assign("dashboardAdmin.html")
+        }
+
+        return response
+    }
+
+    static async cadastrarDepartamento(data) {
+        const url = this.baseUrl + "departments"
+        let responseStatusCode
+
+        const response = await fetch(url,
+            {
+                method: "POST",
+                headers: this.headers,
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                responseStatusCode = res.status
+                return res
+            })
+            .then(res => res.json())
+
         if (responseStatusCode == 201) {
             window.location.assign("dashboardAdmin.html")
         }
