@@ -2,21 +2,26 @@ import { Api } from "../api.js";
 
 class empresas {
 
-    static async getDepartamentos(empresaId) {
-        const response = Api.getDepartamentos(empresaId)
+    static async getListaDepartamentos(empresa) {
         let listaDepartamentos = []
+        const data = {
+            empresaName: empresa,
+            name: null
+        }
+        const response = await Api.getDepartamentos(data)
+        
 
-        await response.then(res => {
-            if (res) {
-                if (Array.isArray(res)) {
-                    res.forEach(element => {
-                        listaDepartamentos.push(element)
-                    })
-                } else {
-                    listaDepartamentos.push(res)
-                }
+        if (response) {
+            if (Array.isArray(response)) {
+                response.forEach(element => {
+                    listaDepartamentos.push(element)
+                })
+            } else {
+                listaDepartamentos.push(response)
             }
-        })
+        }
+
+        console.log(listaDepartamentos)
 
         return listaDepartamentos
     }
@@ -26,12 +31,14 @@ class empresas {
         const prevButton = document.createElement("button")
         const nextButton = document.createElement("button")
         const departamentoDiv = document.createElement("div")
-        const listaDepartamentos = await this.getDepartamentos(empresa.uuid)
+        const listaDepartamentos = await this.getListaDepartamentos(empresa.name)
         let DivId = 0
 
         carrosselDiv.id = empresa.name.replaceAll(" ", "") + "CarrosselDiv"
         carrosselDiv.className = "carrosselDepartamentos"
 
+        console.log(listaDepartamentos)
+        console.log(empresa)
         if(!listaDepartamentos || !listaDepartamentos.length) {
             const pMsg = document.createElement("p")
             pMsg.innerHTML = "Não possui departamentos."
