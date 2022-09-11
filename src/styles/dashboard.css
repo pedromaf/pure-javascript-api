@@ -7,6 +7,13 @@
 
 }
 
+#setoresDiv {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 
 h2 {
     padding: 20px;
@@ -14,10 +21,53 @@ h2 {
 }
 
 #listaSetoresDiv {
-    margin-top: 2rem;
+    margin-bottom: 1rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    overflow-x: auto;
     font-size: 19px;
     text-decoration: underline;
-    row-gap: 35px;
+    column-gap: 20px;
+}
+
+#listaSetoresDiv::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f4f4f4f4;
+    display: none;
+
+}
+
+
+#empresasDiv {
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+
+}
+
+#pageContent ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+#departamentosDiv {
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    text-decoration: none;
+
+}
+
+#funcionáriosDiv {
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    text-decoration: none;
 }

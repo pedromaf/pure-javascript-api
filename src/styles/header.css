@@ -10,7 +10,7 @@ nav>ul {
 
 }
 
-a {
+header>nav>ul>li>a {
     color: #f4f4f4;
     font-size: 18px;
     text-decoration: none;

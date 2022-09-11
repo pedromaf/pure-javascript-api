@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/reset.css">
+        <link rel="stylesheet" href="../styles/header.css">
         <link rel="stylesheet" href="../styles/empresas.css">
         <script src="../scripts/models/empresas.js" type="module" defer></script>
         <title>Listar Empresas</title>
@@ -19,14 +21,13 @@
                 </ul>
             </nav>
         </header>
-        
-        <div id="pageContent">
+
+        <div id="pageContent" class="cadastroEmpresa">
             <h1>Gerenciar Empresas</h1>
 
             <h2>Empresas Cadastradas</h2>
 
-            <label for="filterSector">Filtrar por Setor</label>
-            <input type="text" id="filterSector" name="filterSector">
+            <input type="text" id="filterSector" placeholder="Filtrar por setor" name="filterSector">
             <button id="filterButton" type="button">Filtrar</button>
             <button id="clearFilterButton" type="button">Limpar filtro</button><br><br>
             <p id="appliedFilter"></p>
@@ -34,7 +35,7 @@
             <div id="listaEmpresas">
 
             </div>
-            
+
         </div>
 
         <footer>
