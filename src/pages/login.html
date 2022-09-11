@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../styles/home.css">
-        <script src="../scripts/models/login.js" type="module" defer></script>
-        <script src="../scripts/models/empresas.js" type="module" defer></script>
-        <title>Home</title>
-    </head>
-    <body>
-        <div id="loginDiv">
-            <h2>Login</h2>
-            
-            <form>
-                <div id="errorMsgList" class="credentialErrors">
-                </div>
-                
-                <label for="loginEmail">Email</label>
-                <input type="email" id="loginEmail" name="loginEmail"><br><br>
 
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" name="loginPassword"><br><br>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/home.css">
+    <script src="../scripts/models/login.js" type="module" defer></script>
+    <script src="../scripts/models/empresas.js" type="module" defer></script>
+    <title>Home</title>
+</head>
 
-                <button id="loginButton" type="button">Entrar</button>
-            </form>
+<body>
+    <div id="loginDiv">
+        <h2>Login</h2>
 
-            <p> Ainda não é cadastrado? <a href="../../index.html">Fazer cadastro</a>
-        </div>
-
-        <hr>
-
-        <div id="listaEmpresasDiv">
-            <h2>Empresas</h2>
-
-            <label for="filterSector">Filtrar por Setor</label>
-            <input type="text" id="filterSector" name="filterSector">
-            <button id="filterButton" type="button">Filtrar</button>
-            <button id="clearFilterButton" type="button">Limpar filtro</button><br><br>
-            <p id="appliedFilter"></p>
-
-            <div id="listaEmpresas">
+        <form>
+            <div id="errorMsgList" class="credentialErrors">
             </div>
+
+            <label for="loginEmail">Email</label>
+            <input placeholder="Digite seu email" type="email" id="loginEmail" name="loginEmail"><br><br>
+
+            <label for="loginPassword">Password</label>
+            <input placeholder="Digite aqui a sua senha" type="password" id="loginPassword"
+                name="loginPassword"><br><br>
+
+            <button id="loginButton" type="button">Entrar</button>
+        </form>
+
+        <p> Ainda não é cadastrado? <a href="../../index.html">Fazer cadastro</a>
+    </div>
+
+    <hr>
+
+    <div id="listaEmpresasDiv">
+        <h2>Empresas</h2>
+
+        <label for="filterSector">Filtrar por Setor</label>
+        <input placeholder="Digite aqui o setor que você procura" type="text" id="filterSector" name="filterSector">
+        <button id="filterButton" type="button">Filtrar</button>
+        <button id="clearFilterButton" type="button">Limpar filtro</button><br><br>
+        <p id="appliedFilter"></p>
+
+        <div id="listaEmpresas">
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

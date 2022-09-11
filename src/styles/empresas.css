@@ -1,3 +1,31 @@
 .fieldsErrors {
     color: red;
 }
+
+#pageContent {
+
+    box-shadow: 0px 4px 30px -10px rgba(0, 0, 0, 0.25);
+    width: 400px;
+    margin: 0 auto;
+    height: 600px;
+    text-align: center;
+
+}
+
+
+.listaEmpresa {
+
+    color: black;
+    font-size: 19px;
+    font-weight: 600;
+
+}
+
+.ul--empresa {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    font-size: 19px;
+    margin-top: 8rem;
+
+}
