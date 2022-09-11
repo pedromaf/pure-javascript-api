@@ -33,6 +33,8 @@ class funcionarios {
         errorMsgList.innerHTML = ""
         searchResultDiv.innerHTML = ""
 
+        listaFuncionariosTitle.innerHTML = "Funcionários do " + nomeDepartamento + " da " + nomeEmpresa
+
         if(!data.empresa) {
             const erroEmpresa = document.createElement("p")
             erroEmpresa.innerHTML = "Nome da empresa não pode ser vazio."
