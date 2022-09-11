@@ -2,10 +2,6 @@ import { Api } from "../api.js"
 
 class departamentos {
 
-    static getDepartamentosByEmpresaName() {
-
-    }
-
     static async criarDepartamento() {
         const nomeDepartamento = document.getElementById("cadastroDepartamentoNome").value
         const descricaoDepartamento = document.getElementById("cadastroDepartamentoDescricao").value
@@ -39,9 +35,59 @@ class departamentos {
             }
         }
     }
+
+    static createDepartamentoDiv(departamento) {
+        const departamentoDiv = document.createElement("div")
+        const h3Nome = document.createElement("h3")
+        const pDescricao = document.createElement("p")
+
+        h3Nome.innerHTML = departamento.name
+        pDescricao.innerHTML = departamento.description
+
+        departamentoDiv.appendChild(h3Nome)
+        departamentoDiv.appendChild(pDescricao)
+
+        return departamentoDiv
+    }
+
+    static async pesquisarDepartamentos() {
+        const nomeEmpresa = document.getElementById("pesquisarDepartamentoNomeEmpresa").value
+        const nomeDepartamento = document.getElementById("pesquisarDepartamentoNome").value
+        const listaDepartamentos = document.getElementById("listaDepartamentos")
+        const searchTitle = document.getElementById("searchTitle")
+
+        const data = {
+            empresaName: nomeEmpresa,
+            name: nomeDepartamento
+        }
+        const response = await Api.getDepartamentos(data)
+
+        listaDepartamentos.innerHTML = ""
+        searchTitle.innerHTML = "Departamentos de " + nomeEmpresa
+
+        if (response.length > 0 ) {
+            if (Array.isArray(response)) {
+                response.forEach(departamento => {
+                    listaDepartamentos.appendChild(this.createDepartamentoDiv(departamento))
+                })
+            } else {
+                listaDepartamentos.appendChild(this.createDepartamentoDiv(response))
+            }
+        } else {
+            listaDepartamentos.innerHTML = "Nenhum departamento encontrado."
+        }
+    }
 }
 
+function pesquisarDepartamentosPageEventLoader() {
+    const pesquisarButton = document.getElementById("pesquisarButton")
 
+    pesquisarButton.addEventListener("click", event => {
+        event.preventDefault()
+
+        departamentos.pesquisarDepartamentos()
+    })
+}
 
 function criarDepartamentosPageEventLoader() {
     const cadastroButton = document.getElementById("cadastroButton")
@@ -53,10 +99,12 @@ function criarDepartamentosPageEventLoader() {
     })
 }
 
-
 switch(document.title) {
     case "Cadastrar Departamento":
         criarDepartamentosPageEventLoader()
+        break
+    case "Pesquisar Departamentos":
+        pesquisarDepartamentosPageEventLoader()
         break
     default:
 }

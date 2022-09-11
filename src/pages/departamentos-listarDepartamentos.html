@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../styles/departamentos.css">
-        <title>Departamentos Cadastrados</title>
+        <script src="../scripts/models/departamentos.js" type="module" defer></script>
+        <title>Pesquisar Departamentos</title>
     </head>
     <body>
         <header>
@@ -21,7 +22,23 @@
         <div id="pageContent">
             <h1>Gerenciar Departamentos</h1>
             
-            <h2>Departamentos Cadastrados</h2>
+            <h2>Pesquisar Departamentos</h2>
+            <div id="pesquisarDepartamentosDiv">
+                <form>
+                    <label for="pesquisarDepartamentoNomeEmpresa">Nome da Empresa</label>
+                    <input type="text" id="pesquisarDepartamentoNomeEmpresa" name="pesquisarDepartamentoNomeEmpresa"><br><br>
+                    
+                    <label for="pesquisarDepartamentoNome">Nome do Departamento</label>
+                    <input type="text" id="pesquisarDepartamentoNome" name="pesquisarDepartamentoNome"><br><br>
+                
+                    <button id="pesquisarButton" type="button">Pesquisar</button>
+                </form>
+            </div>
+            <hr>
+            <div id="searchResultDiv">
+                <h2 id="searchTitle"></h2>
+                <div id="listaDepartamentos">
+            </div>
         </div>
 
         <footer>
