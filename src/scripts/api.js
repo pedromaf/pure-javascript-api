@@ -111,6 +111,16 @@ export class Api {
         return searchResult
     }
 
+    static async getEmpresaIdByName(nomeEmpresa) {
+        const empresa = await this.getEmpresaByName(nomeEmpresa)
+
+        if(empresa == null) {
+            return null
+        } else {
+            return empresa.uuid
+        }
+    }
+
     static async getSetores() {
         const url = this.baseUrl + "sectors"
 
@@ -199,6 +209,31 @@ export class Api {
         if (responseStatusCode == 201) {
             window.location.assign("dashboardAdmin.html")
         }
+
+        return response
+    }
+
+    static async cadastrarDepartamento(data) {
+        const url = this.baseUrl + "departments"
+        let responseStatusCode
+
+        const response = await fetch(url,
+            {
+                method: "POST",
+                headers: this.headers,
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                responseStatusCode = res.status
+                return res
+            })
+            .then(res => res.json())
+
+        if (responseStatusCode == 201) {
+            window.location.assign("dashboardAdmin.html")
+        }
+
+        console.log("AQUI")
 
         return response
     }
