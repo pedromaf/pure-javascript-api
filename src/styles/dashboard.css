@@ -14,10 +14,15 @@
     justify-content: space-between;
 }
 
+a {
+    text-decoration: none;
+
+}
+
 
 h2 {
     padding: 20px;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 #listaSetoresDiv {
@@ -44,6 +49,8 @@ h2 {
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+    font-weight: 600;
+
 
 }
 
@@ -51,6 +58,10 @@ h2 {
     display: flex;
     flex-direction: column;
     row-gap: 15px;
+    font-size: 18px;
+    font-weight: 600;
+
+
 }
 
 #departamentosDiv {
@@ -60,6 +71,8 @@ h2 {
     flex-direction: column;
     row-gap: 5px;
     text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
 
 }
 
