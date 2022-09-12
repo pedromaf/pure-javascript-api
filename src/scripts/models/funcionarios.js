@@ -51,12 +51,22 @@ class funcionarios {
 
         if(response.length > 0) {
             response.forEach(funcionario => {
-                searchResultDiv.appendChild()
+                searchResultDiv.appendChild(this.createFuncionarioDiv(funcionario))
             })
         } else {
             searchResultDiv.innerHTML = "Nenhum funcionário encontrado." 
         }
     }
+}
+
+function contratarFuncionarioPageEventLoader() {
+    const contratarButton = document.getElementById("contratarButton")
+
+    contratarButton.addEventListener("click", event => {
+        event.preventDefault()
+
+        funcionarios.contratarFuncionario()
+    })
 }
 
 function pesquisarFuncionariosPageEventLoader() {
@@ -72,6 +82,9 @@ function pesquisarFuncionariosPageEventLoader() {
 switch(document.title) {
     case "Pesquisar Funcionários":
         pesquisarFuncionariosPageEventLoader()
+        break
+    case "Contratar Funcionário":
+        contratarFuncionarioPageEventLoader()
         break
     default:
 }

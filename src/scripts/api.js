@@ -44,7 +44,13 @@ export class Api {
         return response
     }
 
-    //TODO: logout()
+    static logout() {
+        localStorage.setItem(this.tokenName, null)
+        localStorage.setItem(this.isAdminName, null)
+        localStorage.setItem(this.uuidName, null)
+
+        window.location.assign("../../index.html")
+    }
 
     static async cadastro(data) {
         const url = this.baseUrl + "auth/register/user"
