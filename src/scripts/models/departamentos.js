@@ -55,7 +55,6 @@ class departamentos {
         const nomeDepartamento = document.getElementById("pesquisarDepartamentoNome").value
         const listaDepartamentos = document.getElementById("listaDepartamentos")
         const searchTitle = document.getElementById("searchTitle")
-
         const data = {
             empresaName: nomeEmpresa,
             name: nomeDepartamento

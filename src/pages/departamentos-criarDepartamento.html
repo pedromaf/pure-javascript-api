@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
     <meta charset="UTF-8">
@@ -44,6 +45,51 @@
 
                 <button id="cadastroButton" type="button">Cadastrar</button>
             </form>
+=======
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/departamentos.css">
+        <script src="../scripts/models/departamentos.js" type="module" defer></script>
+        <script src="../scripts/models/logout.js" type="module" defer></script>
+        <title>Cadastrar Departamento</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="dashboardAdmin.html">Dashboard</a></li>
+                    <li><a href="empresas.html">Empresas</a></li>
+                    <li><a href="departamentos.html">Departamentos</a></li>
+                    <li><a href="funcionarios.html">Funcionarios</a></li>
+                    <li><button id="logoutButton" type="button">Logout</button></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div id="pageContent">
+            <h1>Gerenciar Departamentos</h1>
+            
+            <h2>Cadastrar Departamento</h2>
+            <div id="cadastroDepartamentoDiv">
+                <form>
+                    <div id="errorMsgList" class="fieldsErrors">
+                    </div>
+    
+                    <label for="cadastroDepartamentoNome">Nome</label>
+                    <input type="text" id="cadastroDepartamentoNome" name="cadastroDepartamentoNome"><br><br>
+    
+                    <label for="cadastroDepartamentoDescricao">Descrição</label>
+                    <input type="text" id="cadastroDepartamentoDescricao" name="cadastroEmail"><br><br>
+    
+                    <label for="cadastroDepartamentoNomeEmpresa">Nome da Empresa</label>
+                    <input type="text" id="cadastroDepartamentoNomeEmpresa" name="cadastroDepartamentoNomeEmpresa"><br><br>
+    
+                    <button id="cadastroButton" type="button">Cadastrar</button>
+                </form>
+            </div>
+>>>>>>> d3789c00abf7d26efc274903013286c7d6923304
         </div>
     </div>
 

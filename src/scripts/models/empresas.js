@@ -21,8 +21,6 @@ class empresas {
             }
         }
 
-        console.log(listaDepartamentos)
-
         return listaDepartamentos
     }
 
@@ -37,8 +35,6 @@ class empresas {
         carrosselDiv.id = empresa.name.replaceAll(" ", "") + "CarrosselDiv"
         carrosselDiv.className = "carrosselDepartamentos"
 
-        console.log(listaDepartamentos)
-        console.log(empresa)
         if(!listaDepartamentos || !listaDepartamentos.length) {
             const pMsg = document.createElement("p")
             pMsg.innerHTML = "Não possui departamentos."

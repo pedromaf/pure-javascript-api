@@ -44,7 +44,13 @@ export class Api {
         return response
     }
 
-    //TODO: logout()
+    static logout() {
+        localStorage.setItem(this.tokenName, null)
+        localStorage.setItem(this.isAdminName, null)
+        localStorage.setItem(this.uuidName, null)
+
+        window.location.assign("../../index.html")
+    }
 
     static async cadastro(data) {
         const url = this.baseUrl + "auth/register/user"
@@ -193,6 +199,83 @@ export class Api {
         }
 
         return returnDepartamento
+    }
+
+    static verifyCompanieName(departamento, empresaId) {
+        const empresas = departamento.companies
+
+        if (Array.isArray(empresas)) {
+            empresas.forEach(empresa => {
+                if (empresa.uuid == empresaId) {
+                    return true
+                }
+            })
+        } else if (empresas.uuid == empresaId) {
+            return true
+        }
+
+        return false
+    }
+
+    static async getDepartamentoIdByName(nomeDepartamento, empresaId) {
+        const url = this.baseUrl + "departments"
+
+        const response = await fetch(url,
+            {
+                method: "GET",
+                headers: this.headers
+            })
+            .then(res => res.json())
+        
+        if(response.length > 0) {
+            if(Array.isArray(response)) {
+                response.forEach(departamento => {
+                    if(departamento.name == nomeDepartamento) {
+                        if (this.verifyCompanieName(departamento, empresaId)) {
+                            return departamento.uuid
+                        }
+                    }
+                })
+            } else {
+                if(response.name == nomeDepartamento) {
+                    if (this.verifyCompanieName(response, empresaId)) {
+                        return response.uuid
+                    }
+                }
+            }
+        }
+
+        return null
+    }
+
+    static async getAllUsers() {
+        const url = this.baseUrl + "users"
+        
+        return await fetch(url,
+            {
+                method: "GET",
+                headers: this.headers
+            })
+            .then(res => res.json())
+    }
+
+    static async getListaFuncionarios(data) {
+        const allUsers = this.getAllUsers()
+        const empresaId = this.getEmpresaIdByName(data.empresa)
+        const departamentoId = this.getDepartamentoIdByName(data.departamento, empresaId)
+        const listaFuncionarios = []
+
+        if(Array.isArray(allUsers)) {
+            allUsers.forEach(user => {
+                if(user.department_uuid == departamentoId) {
+                    listaFuncionarios.push(user)
+                }
+            })
+        } else if (allUsers.department_uuid == departamentoId) {
+            listaFuncionarios.push(allUsers)
+        }
+
+        return listaFuncionarios
     }
 
     static async cadastrarEmpresa(data) {
