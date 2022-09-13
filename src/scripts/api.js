@@ -188,14 +188,13 @@ export class Api {
         
         if (returnDepartamento && Array.isArray(response)) {
             if(data.name) {
+                returnDepartamento = []
                 response.forEach(departamento => {
                     if(departamento.name == data.name) {
                         returnDepartamento = departamento
                     }
                 })
             }
-
-            return returnDepartamento
         }
 
         return returnDepartamento

@@ -341,7 +341,7 @@ switch(document.title) {
         homePageEventLoader()
         break
     case "Listar Empresas":
-        empresas.loadListaEmpresas()
+        empresas.loadListaEmpresas(null)
         homePageEventLoader()
         break
     case "Cadastrar Empresa":

@@ -59,21 +59,28 @@ class departamentos {
             empresaName: nomeEmpresa,
             name: nomeDepartamento
         }
-        const response = await Api.getDepartamentos(data)
+        
+        if (nomeEmpresa == "") {
+            alert("É necessário inserir o nome da empresa.")
+            
+            return
+        }
+        
+        let response = await Api.getDepartamentos(data)
 
         listaDepartamentos.innerHTML = ""
         searchTitle.innerHTML = "Departamentos de " + nomeEmpresa
-
-        if (response.length > 0 ) {
-            if (Array.isArray(response)) {
+        
+        if(Array.isArray(response)) {
+            if (response.length > 0) {
                 response.forEach(departamento => {
                     listaDepartamentos.appendChild(this.createDepartamentoDiv(departamento))
                 })
             } else {
-                listaDepartamentos.appendChild(this.createDepartamentoDiv(response))
+                listaDepartamentos.innerHTML = "Nenhum departamento encontrado."
             }
         } else {
-            listaDepartamentos.innerHTML = "Nenhum departamento encontrado."
+            listaDepartamentos.appendChild(this.createDepartamentoDiv(response))
         }
     }
 }
