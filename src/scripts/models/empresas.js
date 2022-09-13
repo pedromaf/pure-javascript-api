@@ -82,12 +82,6 @@ class empresas {
         let description = document.createElement("p")
         let sector = document.createElement("p")
         let openingHours = document.createElement("p")
-        if(!simplified) {
-            let departaments = document.createElement("p")
-            let carrosselDiv = await this.createCarrosselDiv(empresa)
-        
-            departaments.innerHTML = "Departamentos: "
-        }
 
         name.innerHTML = empresa.name
         description.innerHTML = "Descrição: " + empresa.description
@@ -99,6 +93,11 @@ class empresas {
         empresaDiv.appendChild(openingHours)
         
         if(!simplified) {
+            let departaments = document.createElement("p")
+            let carrosselDiv = await this.createCarrosselDiv(empresa)
+        
+            departaments.innerHTML = "Departamentos: "
+            
             empresaDiv.appendChild(departaments)
             empresaDiv.appendChild(carrosselDiv)
         }
