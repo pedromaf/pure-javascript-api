@@ -76,26 +76,33 @@ class empresas {
         return carrosselDiv
     }
 
-    static async createEmpresaDiv(empresa) {
+    static async createEmpresaDiv(empresa, simplified = false) {
         let empresaDiv = document.createElement("div")
         let name = document.createElement("h3")
         let description = document.createElement("p")
         let sector = document.createElement("p")
         let openingHours = document.createElement("p")
-        let departaments = document.createElement("p")
-        let carrosselDiv = await this.createCarrosselDiv(empresa)
+        if(!simplified) {
+            let departaments = document.createElement("p")
+            let carrosselDiv = await this.createCarrosselDiv(empresa)
+        
+            departaments.innerHTML = "Departamentos: "
+        }
 
         name.innerHTML = empresa.name
         description.innerHTML = "Descrição: " + empresa.description
         sector.innerHTML = "Setor: " + empresa.sectors["description"]
         openingHours.innerHTML = "Abre às: " + empresa.opening_hours
-        departaments.innerHTML = "Departamentos: "
 
         empresaDiv.appendChild(name)
         empresaDiv.appendChild(sector)
         empresaDiv.appendChild(openingHours)
-        empresaDiv.appendChild(departaments)
-        empresaDiv.appendChild(carrosselDiv)
+        
+        if(!simplified) {
+            empresaDiv.appendChild(departaments)
+            empresaDiv.appendChild(carrosselDiv)
+        }
+
         empresaDiv.appendChild(description)
 
         return empresaDiv
@@ -126,7 +133,7 @@ class empresas {
         }
     }
 
-    static async loadListaEmpresas(filter = null) {
+    static async loadListaEmpresas(filter = null, simplified = false) {
         const listaEmpresas = document.getElementById("listaEmpresas")
         const appliedFilter = document.getElementById("appliedFilter")
         let responseList
@@ -136,10 +143,9 @@ class empresas {
 
         if (filter) {
             appliedFilter.innerHTML = "Setor: " + filter 
-            responseList = await Api.getListaEmpresas(filter)
-        } else {
-            responseList = await Api.getListaEmpresas()
         }
+        
+        responseList = await Api.getListaEmpresas(filter)
         
         if (responseList == null) {
             listaEmpresas.innerHTML = "Ocorreu um erro ao carregar a lista de empresas."
@@ -147,14 +153,14 @@ class empresas {
             listaEmpresas.innerHTML = "Nenhuma empresa encontrada neste setor."
         } else if (Array.isArray(responseList)) {
             responseList.forEach(async empresa => {
-                let empresaDiv = await this.createEmpresaDiv(empresa)
+                let empresaDiv = await this.createEmpresaDiv(empresa, simplified)
                 
                 listaEmpresas.appendChild(empresaDiv)
 
                 loadCarrosselButtonEvents(empresaDiv)
             })
         } else {
-            let empresaDiv = await this.createEmpresaDiv(responseList)
+            let empresaDiv = await this.createEmpresaDiv(responseList, simplified)
 
             listaEmpresas.appendChild(empresaDiv)
 
@@ -298,13 +304,13 @@ function homePageEventLoader() {
 
         const filterField = document.getElementById("filterSector")
 
-        empresas.loadListaEmpresas(filterField.value)
+        empresas.loadListaEmpresas(filterField.value, true)
     })
 
     clearFilterButton.addEventListener("click", (event) => {
         event.preventDefault()
 
-        empresas.loadListaEmpresas()
+        empresas.loadListaEmpresas(null, true)
     })
 }
 
@@ -330,8 +336,11 @@ function pesquisarEmpresaPageEventLoader() {
 }
 
 switch(document.title) {
-    case "Listar Empresas":
     case "Home":
+        empresas.loadListaEmpresas(null, true)
+        homePageEventLoader()
+        break
+    case "Listar Empresas":
         empresas.loadListaEmpresas()
         homePageEventLoader()
         break

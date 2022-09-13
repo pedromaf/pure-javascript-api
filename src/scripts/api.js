@@ -78,7 +78,7 @@ export class Api {
     static async getListaEmpresas(sector = null) {
         let url = this.baseUrl + "companies"
         
-        if (sector != null) {
+        if (sector) {
             url += "/" + sector
         }
 
