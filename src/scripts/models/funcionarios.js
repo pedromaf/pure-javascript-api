@@ -57,6 +57,30 @@ class funcionarios {
             searchResultDiv.innerHTML = "Nenhum funcionário encontrado." 
         }
     }
+
+    static async contratarFuncionario() {
+        const nomeEmpresa = document.getElementById("contratarEmpresaName").value
+        const nomeDepartamento = document.getElementById("contratarDepartamentoName").value
+        const nomeUsuario = document.getElementById("contratarUsuarioName").value
+
+        if (nomeEmpresa == "" || nomeDepartamento == "" || nomeUsuario == "") {
+            alert("Todos os campos devem ser preenchidos.")
+            
+            return 
+        }
+
+        const empresaId = await Api.getEmpresaIdByName(nomeEmpresa)
+        const departamentoId = await Api.getDepartamentoIdByName(nomeDepartamento, empresaId)
+        const usuarioId = await Api.getUsuarioIdByName(nomeUsuario)
+
+        const data = {
+            user_uuid: usuarioId,
+            department_uuid: departamentoId
+        }
+
+        const response = await Api.contratarFuncionario(data, nomeUsuario)
+        alert(response)
+    }
 }
 
 function contratarFuncionarioPageEventLoader() {

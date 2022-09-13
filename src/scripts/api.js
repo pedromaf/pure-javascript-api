@@ -218,6 +218,7 @@ export class Api {
 
     static async getDepartamentoIdByName(nomeDepartamento, empresaId) {
         const url = this.baseUrl + "departments"
+        let departamentoId = null
 
         const response = await fetch(url,
             {
@@ -225,26 +226,26 @@ export class Api {
                 headers: this.headers
             })
             .then(res => res.json())
-        
-        if(response.length > 0) {
-            if(Array.isArray(response)) {
+
+        if(Array.isArray(response)) {
+            if(response.length > 0) {
                 response.forEach(departamento => {
                     if(departamento.name == nomeDepartamento) {
                         if (this.verifyCompanieName(departamento, empresaId)) {
-                            return departamento.uuid
+                            departamentoId = departamento.uuid
                         }
                     }
                 })
-            } else {
-                if(response.name == nomeDepartamento) {
-                    if (this.verifyCompanieName(response, empresaId)) {
-                        return response.uuid
-                    }
+            }
+        } else {
+            if(response.name == nomeDepartamento) {
+                if (this.verifyCompanieName(response, empresaId)) {
+                    departamentoId = response.uuid
                 }
             }
         }
 
-        return null
+        return departamentoId
     }
 
     static async getAllUsers() {
@@ -275,6 +276,67 @@ export class Api {
         }
 
         return listaFuncionarios
+    }
+
+    static async getUsuariosSemDepartamento() {
+        const url = this.baseUrl + "admin/out_of_work"
+
+        const response = await fetch(url,
+            {
+                method: "GET",
+                headers: this.headers
+            })
+            .then(res => res.json())
+        
+        return response
+    }
+
+    static async getUsuarioIdByName(nomeUsuario) {
+        const usuarios = await this.getAllUsers()
+        let usuarioId = null
+
+        if (Array.isArray(usuarios)) {
+            if (usuarios.length > 0) {
+                usuarios.forEach(usuario => {
+                    if(usuario.username == nomeUsuario) {
+                        usuarioId = usuario.uuid
+                        return
+                    }
+                })
+            }
+        } else {
+            usuarioId = usuarios.uuid
+        }
+
+        return usuarioId
+    }
+
+    static async contratarFuncionario(data, nomeUsuario) {
+        const url = this.baseUrl + "departments/hire"
+        let responseStatusCode
+
+        const response = await fetch(url,
+            {
+                method: "PATCH",
+                headers: this.headers,
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                responseStatusCode = res.status
+                return res
+            })
+            .then(res => res.json())
+
+        switch (responseStatusCode) {
+            case 200:
+                return "Usuário " + nomeUsuario + " contratado com sucesso."
+            case 404:
+                return "Usuário " + nomeUsuario + " não encontrado"
+            case 400:
+                return "O usuário " + nomeUsuario + " já está associado a um departamento."
+            default:
+                return "Ocorreu um erro ao processar a solicitação."
+        }
     }
 
     static async cadastrarEmpresa(data) {
@@ -317,6 +379,7 @@ export class Api {
             .then(res => res.json())
 
         if (responseStatusCode == 201) {
+            alert("Departamento cadastrado com sucesso.")
             window.location.assign("dashboardAdmin.html")
         }
 
