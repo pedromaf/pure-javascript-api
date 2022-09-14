@@ -464,4 +464,22 @@ export class Api {
                 return "Ocorreu um erro inesperado."
         }
     }
+
+    static async deletarDepartamento(departamentoId) {
+        const url = this.baseUrl + "departments/" + departamentoId
+        let responseStatusCode 
+
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: this.headers
+        })
+        .then(res => {
+            responseStatusCode = res.status
+            return res
+        })
+
+        if (responseStatusCode == 204) {
+            return "Departamento deletado com sucesso."
+        }
+    }
 }
