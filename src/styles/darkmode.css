@@ -1,0 +1,9 @@
+.darkmode-header {
+    background-color: var(--blue2);
+    color: var(--white);
+}
+
+.darkmode-body {
+    background-color: var(--gray3);
+    color: var(--white);
+}
