@@ -102,24 +102,24 @@ class funcionarios {
         const nome = document.createElement("p")
         const email = document.createElement("p")
         const nivel = document.createElement("p")
-        
-        const nomeLabel = document.createElement("label")
-        const emailLabel = document.createElement("label")
-        const nivelLabel = document.createElement("label")
+        const tipo = document.createElement("p")
 
         div.Id = usuario.username + "ListaItemDiv"
         nome.id = usuario.username + "Nome"
         email.id = usuario.username + "Email"
         nivel.id = usuario.username + "Nivel"
+        tipo.id = usuario.username + "Tipo"
 
         div.className = "listaUsuarioItem"
         nome.innerHTML = "Usuário: " + usuario.username
         email.innerHTML = "Email: " + usuario.email
         nivel.innerHTML = "Proficiência: " + usuario.professional_level
-        
+        tipo.innerHTML = "Modalidade: " + usuario.kind_of_work
+
         div.appendChild(nome)
         div.appendChild(email)
         div.appendChild(nivel)
+        div.appendChild(tipo)
     
         return div
     }

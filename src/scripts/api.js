@@ -495,6 +495,30 @@ export class Api {
         }
     }
 
+    static async editarUsuario(data, usuarioId) {
+        const url = this.baseUrl + "admin/update_user/" + usuarioId
+        let responseStatusCode
+
+        const response = await fetch(url,
+            {
+                method: "PATCH",
+                headers: this.headers,
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                responseStatusCode = res.status
+                return res
+            })
+        
+        if(responseStatusCode == 200) {
+            alert("Informações do usuário alteradas com sucesso.")
+        } else {
+            alert("Ocorreu um erro inesperado.")
+        }
+
+        return response
+    }
+
     static async deletarDepartamento(departamentoId) {
         const url = this.baseUrl + "departments/" + departamentoId
         let responseStatusCode 
@@ -510,6 +534,26 @@ export class Api {
 
         if (responseStatusCode == 204) {
             return "Departamento deletado com sucesso."
+        } else {
+            return "Ocorreu um erro."
+        }
+    }
+
+    static async deletarUsuario(usuarioId) {
+        const url = this.baseUrl + "admin/delete_user/" + usuarioId
+        let responseStatusCode 
+
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: this.headers
+        })
+        .then(res => {
+            responseStatusCode = res.status
+            return res
+        })
+
+        if (responseStatusCode == 204) {
+            return "Usuário deletado com sucesso."
         } else {
             return "Ocorreu um erro."
         }
