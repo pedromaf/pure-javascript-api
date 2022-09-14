@@ -61,9 +61,48 @@ class dashboardAdmin {
         }
     }
 
+    static createFuncionarioDiv(funcionario) {
+        const div = document.createElement("div")
+        const nome = document.createElement("h3")
+        const nivel = document.createElement("p")
+        const tipo = document.createElement("p")
+
+        nome.innerHTML = funcionario.username
+        nivel.innerHTML = "Nível " + funcionario.professional_level
+        tipo.innerHTML = "Modalidade: " + funcionario.kind_of_work
+
+        div.appendChild(nome)
+        div.appendChild(nivel)
+        div.appendChild(tipo)
+
+        return div
+    }
+
+    static async loadFuncionarios() {
+        const listaFuncionarios = document.getElementById("listaFuncionarios")
+        const response = await Api.getAllFuncionarios()
+
+        listaFuncionarios.innerHTML = ""
+
+        if (Array.isArray(response)) {
+            if(response.length > 0) {
+                response.forEach(funcionario => {
+                    listaFuncionarios.appendChild(this.createFuncionarioDiv(funcionario))
+                })
+            } else {
+                const p = document.createElement("p")
+                p.innerHTML = "Não há funcionários cadastrados."
+                listaFuncionarios.appendChild(p)
+            }
+        } else {
+            listaFuncionarios.appendChild(this.createFuncionarioDiv(response))
+        }   
+    }
+
     static pageContentLoad() {
         this.loadSetores()
         this.loadDepartamentos()
+        this.loadFuncionarios()
     }
 }
 

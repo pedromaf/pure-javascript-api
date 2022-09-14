@@ -347,6 +347,24 @@ export class Api {
         return response
     }
 
+    static async getAllFuncionarios() {
+        const users = await this.getAllUsers()
+        const listaFuncionarios = []
+
+        if(Array.isArray(users)) {
+            users.forEach(user => {
+                if(user.department_uuid != null) {
+                    listaFuncionarios.push(user)
+                }
+            })
+        } else if (users.department_uuid != null) {
+            listaFuncionarios.push(users)
+        }
+
+        return listaFuncionarios
+
+    }
+
     static async contratarFuncionario(data, nomeUsuario) {
         const url = this.baseUrl + "departments/hire"
         let responseStatusCode

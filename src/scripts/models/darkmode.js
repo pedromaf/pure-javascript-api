@@ -37,7 +37,6 @@ class Darkmode {
 }
 function darkmodeEvent() {
     const darkModeBtn = document.querySelector('#darkmode')
-    console.log(darkModeBtn);
     darkModeBtn.addEventListener("click", (event) => {
         event.preventDefault()
         Darkmode.changeMode()

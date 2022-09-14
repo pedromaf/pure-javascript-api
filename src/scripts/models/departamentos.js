@@ -140,12 +140,10 @@ class departamentos {
             if (listaFuncionariosContratados.length > 0) {
                 listaFuncionariosContratados.forEach(async funcionario => {
                     let res = await Api.demitirFuncionario(funcionario.uuid, funcionario.username)
-                    console.log(res)
                 })
             }
         } else {
             let res = await Api.demitirFuncionario(listaFuncionariosContratados.uuid, listaFuncionariosContratados.username)
-            console.log(res)
         }
 
         const response = await Api.deletarDepartamento(departamentoId)
