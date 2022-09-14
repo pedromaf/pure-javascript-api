@@ -48,7 +48,7 @@ class departamentos {
         }
     }
 
-    static createDepartamentoDiv(departamento) {
+    static criarDepartamentoDiv(departamento) {
         const departamentoDiv = document.createElement("div")
         const h3Nome = document.createElement("h3")
         const pDescricao = document.createElement("p")
@@ -86,14 +86,44 @@ class departamentos {
         if(Array.isArray(response)) {
             if (response.length > 0) {
                 response.forEach(departamento => {
-                    listaDepartamentos.appendChild(this.createDepartamentoDiv(departamento))
+                    listaDepartamentos.appendChild(this.criarDepartamentoDiv
+                (departamento))
                 })
             } else {
                 listaDepartamentos.innerHTML = "Nenhum departamento encontrado."
             }
         } else {
-            listaDepartamentos.appendChild(this.createDepartamentoDiv(response))
+            listaDepartamentos.appendChild(this.criarDepartamentoDiv
+        (response))
         }
+    }
+
+    static async editarDepartamento() {
+        const empresa = document.getElementById("editarDepartamentoNomeEmpresa").value
+        const departamento = document.getElementById("editarDepartamentoNome").value
+        const novaDescricao = document.getElementById("editarDepartamentoDescricao").value
+
+        if (empresa == "" || departamento == "" || novaDescricao == "") {
+            alert("Todos os campos devem ser preenchidos.")
+
+            return
+        }
+
+        const empresaId = await Api.getEmpresaIdByName(empresa)
+        const departamentoId = await Api.getDepartamentoIdByName(departamento, empresaId)
+
+        const data = {
+            description: novaDescricao
+        }
+
+        const response = await Api.editarDepartamento(data, departamentoId)
+        
+        alert(response)
+    }
+
+    static async deletarDepartamento() {
+        const empresa = document.getElementById("deletarDepartamentoNomeEmpresa").value
+        const departamento = document.getElementById("deletarDepartamentoNome").value
     }
 
     static createFuncionarioDiv(funcionario) {
@@ -172,6 +202,27 @@ function criarDepartamentosPageEventLoader() {
     })
 }
 
+function editarDepartamentosPageEventLoader() {
+    const editarButton = document.getElementById("editarButton")
+
+    editarButton.addEventListener("click", event => {
+        event.preventDefault()
+
+        departamentos.editarDepartamento()
+    })
+}
+
+function deletarDepartamentosPageEventLoader() {
+    const deletarButton = document.getElementById("deletarButton")
+
+    deletarButton.addEventListener("click", event => {
+        event.preventDefault()
+
+        departamentos.deletarDepartamento()
+    })
+}
+
+
 function listagemFuncionariosPageEventLoader() {
     const searchButton = document.getElementById("pesquisarButton")
 
@@ -191,6 +242,12 @@ switch(document.title) {
         break
     case "Listagem de Funcionários":
         listagemFuncionariosPageEventLoader()
+        break
+    case "Editar Departamento":
+        editarDepartamentosPageEventLoader()
+        break
+    case "Deletar Departamento":
+        deletarDepartamentosPageEventLoader()
         break
     default:
 }

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/darkmode.css">
     <link rel="stylesheet" href="../styles/departamentos.css">
     <script src="../scripts/models/logout.js" type="module" defer></script>
-    <script src="../scripts/models/darkmode.js" type="module" defer></script>
-    <title>Departamentos</title>
+    <script src="../scripts/models/departamentos.js" type="module" defer></script>
+    <title>Editar Departamento</title>
 </head>
 
 <body>
@@ -30,21 +30,29 @@
         </nav>
     </header>
 
-
-    <div id="pageContent" class="gerenciarDepartamento">
+    <div id="pageContent" class="">
         <h1>Gerenciar Departamentos</h1>
-        <ul>
-            <li><a href="departamentos-criarDepartamento.html">Cadastrar Departamento</a></li>
-            <li><a href="departamentos-listarDepartamentos.html">Pesquisar Departamentos</a></li>
-            <li><a href="departamentos-editarDepartamento.html">Editar Departamento</a></li>
-            <li><a href="departamentos-deletarDepartamento.html">Deletar Departamento</a></li>
-            <li><a href="departamentos-listaFuncionarios.html">Listagem de Funcionários</a></li>
-        </ul>
+
+        <h2>Editar Departamento</h2>
+        <div id="editarDepartamentoDiv">
+            <form>
+                <div id="errorMsgList" class="fieldsErrors">
+                </div>
+
+                <input type="text" id="editarDepartamentoNomeEmpresa" placeholder="Nome da Empresa"
+                    name="editarDepartamentoNomeEmpresa">
+                
+                <input type="text" id="editarDepartamentoNome" placeholder="Nome do departamento"
+                    name="editarDepartamentoNome">
+
+                <p>Nova descrição</p>
+                <input type="text" placeholder="Nova descrição" id="editarDepartamentoDescricao" name="editarDepartamentoDescricao">
+
+
+                <button id="editarButton" type="button">Cadastrar</button>
+            </form>
     </div>
 
-    <footer>
-
-    </footer>
 </body>
 
 </html>

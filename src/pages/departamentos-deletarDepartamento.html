@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/darkmode.css">
     <link rel="stylesheet" href="../styles/departamentos.css">
     <script src="../scripts/models/logout.js" type="module" defer></script>
-    <script src="../scripts/models/darkmode.js" type="module" defer></script>
-    <title>Departamentos</title>
+    <script src="../scripts/models/departamentos.js" type="module" defer></script>
+    <title>Deletar Departamento</title>
 </head>
 
 <body>
@@ -30,21 +30,21 @@
         </nav>
     </header>
 
-
-    <div id="pageContent" class="gerenciarDepartamento">
+    <div id="pageContent" class="">
         <h1>Gerenciar Departamentos</h1>
-        <ul>
-            <li><a href="departamentos-criarDepartamento.html">Cadastrar Departamento</a></li>
-            <li><a href="departamentos-listarDepartamentos.html">Pesquisar Departamentos</a></li>
-            <li><a href="departamentos-editarDepartamento.html">Editar Departamento</a></li>
-            <li><a href="departamentos-deletarDepartamento.html">Deletar Departamento</a></li>
-            <li><a href="departamentos-listaFuncionarios.html">Listagem de Funcionários</a></li>
-        </ul>
+
+        <h2>Deletar Departamento</h2>
+        
+        <div id="DeletarDepartamentoDiv">
+            <form>
+                <input type="text" id="DeletarDepartamentoNomeEmpresa" placeholder="Nome da Empresa"
+                    name="DeletarDepartamentoNomeEmpresa">
+                
+                <input type="text" id="DeletarDepartamentoNome" placeholder="Nome do departamento"
+                    name="DeletarDepartamentoNome">
+
+                <button id="DeletarButton" type="button">Deletar</button>
+            </form>
     </div>
-
-    <footer>
-
-    </footer>
 </body>
-
 </html>
