@@ -128,8 +128,6 @@ class funcionarios {
         const listaDiv = document.getElementById("listaUsuariosDiv")
         const response = await Api.getUsuariosSemDepartamento()
 
-        console.log(response)
-
         if(Array.isArray(response)) {
             if (response.length > 0) {
                 response.forEach(usuario => {
