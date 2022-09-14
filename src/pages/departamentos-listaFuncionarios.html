@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../styles/departamentos.css">
     <script src="../scripts/models/logout.js" type="module" defer></script>
     <script src="../scripts/models/departamentos.js" type="module" defer></script>
-    <title>Pesquisar Departamentos</title>
+    <title>Listagem de Funcionários</title>
 </head>
 
 <body>
@@ -26,18 +26,18 @@
         </nav>
     </header>
 
-    <div id="pageContent" class="pesquisarDepartamento">
+    <div id="pageContent" class="">
         <h1>Gerenciar Departamentos</h1>
 
-        <h2>Pesquisar Departamentos</h2>
-        <div id="pesquisarDepartamentosDiv">
+        <h2>Pesquisar Funcionários por Departamento</h2>
+        <div id="pesquisarFuncionariosDiv">
             <form>
 
-                <input type="text" id="pesquisarDepartamentoNomeEmpresa" placeholder="Nome da Empresa"
-                    name="pesquisarDepartamentoNomeEmpresa">
+                <input type="text" id="listagemFuncionariosNomeEmpresa" placeholder="Nome da Empresa"
+                    name="listagemFuncionariosNomeEmpresa">
 
-                <input type="text" id="pesquisarDepartamentoNome" placeholder="Nome do Departamento"
-                    name="pesquisarDepartamentoNome">
+                <input type="text" id="listagemFuncionariosNomeDepartamento" placeholder="Nome do Departamento"
+                    name="listagemFuncionariosNomeDepartamento">
 
                 <button id="pesquisarButton" type="button">Pesquisar</button>
             </form>
@@ -46,7 +46,7 @@
         <div id="searchResultDiv">
             <h2 id="searchTitle"></h2>
 
-            <div id="listaDepartamentos">
+            <div id="listaFuncionarios">
 
             </div>
         </div>

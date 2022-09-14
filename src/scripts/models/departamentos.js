@@ -95,6 +95,61 @@ class departamentos {
             listaDepartamentos.appendChild(this.createDepartamentoDiv(response))
         }
     }
+
+    static createFuncionarioDiv(funcionario) {
+        const div = document.createElement("div")
+        const nome = document.createElement("p")
+        const email = document.createElement("p")
+        const nivel = document.createElement("p")
+        const tipo = document.createElement("p")
+
+        nome.innerHTML = "Nome: " + funcionario.username
+        email.innerHTML = "Email: " + funcionario.email
+        nivel.innerHTML = "Proficiência: " + funcionario.professional_level
+        tipo.innerHTML = "Modalidade de trabalho: " + funcionario.kind_of_work
+
+        div.appendChild(nome)
+        div.appendChild(email)
+        div.appendChild(nivel)
+        div.appendChild(tipo)
+
+        return div
+    }
+
+    static async searchFuncionariosByDepartamento() {
+        const empresa = document.getElementById("listagemFuncionariosNomeEmpresa").value
+        const departamento = document.getElementById("listagemFuncionariosNomeDepartamento").value
+        const listaFuncionarios = document.getElementById("listaFuncionarios")
+        const searchTitle = document.getElementById("searchTitle")
+
+        if (empresa == "" || departamento == "") {
+            alert("Todos os campos devem ser preenchidos.")
+
+            return
+        }
+
+        listaFuncionarios.innerHTML = ""
+        searchTitle.innerHTML = ""
+
+        const response = await Api.getFuncionariosByDepartamento(departamento, empresa)
+
+        searchTitle.innerHTML = "Funcionários do " + departamento + " da " + empresa
+
+        if (Array.isArray(response)) {
+            if (response.length > 0) {
+                response.forEach(funcionario => {
+                    listaFuncionarios.appendChild(this.createFuncionarioDiv(funcionario))
+                })
+            } else {
+                const p = document.createElement("p")
+                p.innerHTML = "Nenhum funcionário encontrado."
+                
+                listaFuncionarios.appendChild(p)
+            }
+        } else {
+            listaFuncionarios.appendChild(this.createFuncionarioDiv(response))
+        }
+    }
 }
 
 function pesquisarDepartamentosPageEventLoader() {
@@ -117,12 +172,25 @@ function criarDepartamentosPageEventLoader() {
     })
 }
 
+function listagemFuncionariosPageEventLoader() {
+    const searchButton = document.getElementById("pesquisarButton")
+
+    searchButton.addEventListener("click", event => {
+        event.preventDefault()
+
+        departamentos.searchFuncionariosByDepartamento()
+    })
+}
+
 switch(document.title) {
     case "Cadastrar Departamento":
         criarDepartamentosPageEventLoader()
         break
     case "Pesquisar Departamentos":
         pesquisarDepartamentosPageEventLoader()
+        break
+    case "Listagem de Funcionários":
+        listagemFuncionariosPageEventLoader()
         break
     default:
 }

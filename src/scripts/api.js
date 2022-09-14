@@ -201,6 +201,29 @@ export class Api {
         return returnDepartamento
     }
 
+    static async getFuncionariosByDepartamento(nomeDepartamento, nomeEmpresa) {
+        const empresaId = await this.getEmpresaIdByName(nomeEmpresa)
+        const departamentoId = await this.getDepartamentoIdByName(nomeDepartamento, empresaId)
+        const usuarios = await this.getAllUsers()
+        let listaFuncionarios = []
+
+        if (Array.isArray(usuarios)) {
+            if (usuarios.length > 0) {
+                usuarios.forEach(usuario => {
+                    if (usuario.department_uuid == departamentoId) {
+                        listaFuncionarios.push(usuario)
+                    }
+                })
+            }
+        } else {
+            if (usuarios.department_uuid == departamentoId) {
+                listaFuncionarios.push(usuarios)
+            }
+        }
+
+        return listaFuncionarios
+    }
+
     static verifyCompanieName(departamento, empresaId) {
         const empresas = departamento.companies
 
