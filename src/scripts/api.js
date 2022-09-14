@@ -480,6 +480,8 @@ export class Api {
 
         if (responseStatusCode == 204) {
             return "Departamento deletado com sucesso."
+        } else {
+            return "Ocorreu um erro."
         }
     }
 }

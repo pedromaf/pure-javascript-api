@@ -124,8 +124,33 @@ class departamentos {
     static async deletarDepartamento() {
         const empresa = document.getElementById("deletarDepartamentoNomeEmpresa").value
         const departamento = document.getElementById("deletarDepartamentoNome").value
-    
         
+        if(empresa == "" || departamento == "") {
+            alert("Todos os campos devem ser preenchidos.")
+
+            return
+        }
+        
+        const empresaId = await Api.getEmpresaIdByName(empresa)
+        const departamentoId = await Api.getDepartamentoIdByName(departamento, empresaId)
+
+        const listaFuncionariosContratados = await Api.getFuncionariosByDepartamento(departamento, empresa)
+
+        if (Array.isArray(listaFuncionariosContratados)) {
+            if (listaFuncionariosContratados.length > 0) {
+                listaFuncionariosContratados.forEach(async funcionario => {
+                    let res = await Api.demitirFuncionario(funcionario.uuid, funcionario.username)
+                    console.log(res)
+                })
+            }
+        } else {
+            let res = await Api.demitirFuncionario(listaFuncionariosContratados.uuid, listaFuncionariosContratados.username)
+            console.log(res)
+        }
+
+        const response = await Api.deletarDepartamento(departamentoId)
+        
+        alert(response)
     }
 
     static createFuncionarioDiv(funcionario) {
