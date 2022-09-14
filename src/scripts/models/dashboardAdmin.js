@@ -41,7 +41,7 @@ class dashboardAdmin {
             listaDepartamentos.innerHTML = "Não há setores até o momento."
         } else if (Array.isArray(departamentos)) {
             departamentos.forEach(departamento => {
-                let name = document.createElement("p")
+                let name = document.createElement("h3")
                 let description = document.createElement("p")
 
                 name.innerHTML = departamento.name
@@ -51,7 +51,7 @@ class dashboardAdmin {
                 listaDepartamentos.appendChild(description)
             })
         } else {
-            let name = document.createElement("p")
+            let name = document.createElement("h3")
 
             name.innerHTML = listaDepartamentos.name
             description.innerHTML = listaDepartamentos.description
