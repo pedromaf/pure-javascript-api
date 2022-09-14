@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../styles/empresas.css">
-        <link rel="stylesheet" href="../styles/reset.css">
-        <link rel="stylesheet" href="../styles/header.css">
-        <script src="../scripts/models/empresas.js" type="module" defer></script>
-        <script src="../scripts/models/logout.js" type="module" defer></script>
-        <title>Pesquisar Empresa</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="dashboardAdmin.html">Dashboard</a></li>
-                    <li><a href="empresas.html">Empresas</a></li>
-                    <li><a href="departamentos.html">Departamentos</a></li>
-                    <li><a href="funcionarios.html">Funcionarios</a></li>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/empresas.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <script src="../scripts/models/empresas.js" type="module" defer></script>
+    <script src="../scripts/models/logout.js" type="module" defer></script>
+    <title>Pesquisar Empresa</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="dashboardAdmin.html">Dashboard</a></li>
+                <li><a href="empresas.html">Empresas</a></li>
+                <li><a href="departamentos.html">Departamentos</a></li>
+                <li><a href="funcionarios.html">Funcionarios</a></li>
+                <div class="buttonsHeader">
                     <li><button id="logoutButton" type="button">Logout</button></li>
-                </ul>
-            </nav>
-        </header>
+                    <li><button id="darkmode" type="button">Dark/Light mode</button></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
 
-        <div id="pageContent" class="pesquisarEmpresa">
-            <h1>Gerenciar Empresas</h1>
+    <div id="pageContent" class="pesquisarEmpresa">
+        <h1>Gerenciar Empresas</h1>
 
-            <h2>Pesquisar Empresa</h2>
+        <h2>Pesquisar Empresa</h2>
 
-            <input type="text" id="empresaNome" placeholder="Digite o nome da empresa"
-                name="empresaNome">
-            <button id="searchButton" type="button">Pesquisar</button><br><br>
+        <input type="text" id="empresaNome" placeholder="Digite o nome da empresa" name="empresaNome">
+        <button id="searchButton" type="button">Pesquisar</button>
 
-            <div id="searchEmpresaResult">
+        <div id="searchEmpresaResult">
 
-            </div>
         </div>
+    </div>
 
-        <footer>
+    <footer>
 
-        </footer>
-    </body>
+    </footer>
+</body>
+
 </html>

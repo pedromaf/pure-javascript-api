@@ -1,58 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../styles/reset.css">
-        <link rel="stylesheet" href="../styles/header.css">
-        <link rel="stylesheet" href="../styles/empresas.css">
-        <script src="../scripts/models/empresas.js" type="module" defer></script>
-        <script src="../scripts/models/logout.js" type="module" defer></script>
-        <title>Cadastrar Empresa</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="dashboardAdmin.html">Dashboard</a></li>
-                    <li><a href="empresas.html">Empresas</a></li>
-                    <li><a href="departamentos.html">Departamentos</a></li>
-                    <li><a href="funcionarios.html">Funcionarios</a></li>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/empresas.css">
+    <script src="../scripts/models/empresas.js" type="module" defer></script>
+    <script src="../scripts/models/logout.js" type="module" defer></script>
+    <title>Cadastrar Empresa</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="dashboardAdmin.html">Dashboard</a></li>
+                <li><a href="empresas.html">Empresas</a></li>
+                <li><a href="departamentos.html">Departamentos</a></li>
+                <li><a href="funcionarios.html">Funcionarios</a></li>
+                <div class="buttonsHeader">
                     <li><button id="logoutButton" type="button">Logout</button></li>
-                </ul>
-            </nav>
-        </header>
-        
-        <div id="pageContent">
-            <h1>Gerenciar Empresas</h1>
-
-            <h2>Cadastrar Empresa</h2>
-
-            <form id="cadastrar--form">
-                <div id="errorMsgList" class="fieldsErrors">
+                    <li><button id="darkmode" type="button">Dark/Light mode</button></li>
                 </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="pageContent">
+        <h1>Gerenciar Empresas</h1>
+
+        <h2>Cadastrar Empresa</h2>
+
+        <form id="cadastrar--form">
+            <div id="errorMsgList" class="fieldsErrors">
+            </div>
 
 
-                <input type="text" placeholder="Nome da empresa" id="cadastroEmpresaNome" name="cadastroEmpresaNome">
+            <input type="text" placeholder="Nome da empresa" id="cadastroEmpresaNome" name="cadastroEmpresaNome">
 
 
-                <input type="text" id="cadastroEmpresaDescricao" placeholder="Descrição da empresa" name="cadastroEmail">
+            <input type="text" id="cadastroEmpresaDescricao" placeholder="Descrição da empresa" name="cadastroEmail">
 
 
-                <input type="text" id="cadastroEmpresaHoraAbertura" placeholder="Horario de abertura da empresa"
-                    name="cadastroEmpresaHoraAbertura">
+            <input type="text" id="cadastroEmpresaHoraAbertura" placeholder="Horario de abertura da empresa"
+                name="cadastroEmpresaHoraAbertura">
 
-                <p>Setor</p>
-                <select name="selectSetorEmpresa" id="setorSelect">
-                </select>
+            <p>Setor</p>
+            <select name="selectSetorEmpresa" id="setorSelect">
+            </select>
 
-                <button id="cadastroButton" type="button">Cadastrar</button>
-            </form>
-        </div>
+            <button id="cadastroButton" type="button">Cadastrar</button>
+        </form>
+    </div>
 
-        <footer>
+    <footer>
 
-        </footer>
-    </body>
+    </footer>
+</body>
+
 </html>

@@ -22,6 +22,12 @@ button {
     margin: 0 auto;
 }
 
+select {
+    width: 30%;
+    border: 1px solid;
+    margin: 0 auto;
+}
+
 :root {
     --gray0: #0A0C0D;
     --gray1: #212529;
