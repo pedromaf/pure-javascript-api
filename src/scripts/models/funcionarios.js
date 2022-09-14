@@ -165,20 +165,7 @@ function demitirFuncionarioPageEventLoader() {
     })
 }
 
-function pesquisarFuncionariosPageEventLoader() {
-    const searchButton = document.getElementById("searchButton")
-
-    searchButton.addEventListener("click", event => {
-        event.preventDefault()
-
-        funcionarios.pesquisarFuncionarios()
-    })
-}
-
 switch(document.title) {
-    case "Pesquisar Funcionários":
-        pesquisarFuncionariosPageEventLoader()
-        break
     case "Contratar Funcionário":
         contratarFuncionarioPageEventLoader()
         break
