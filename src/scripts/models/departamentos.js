@@ -124,6 +124,8 @@ class departamentos {
     static async deletarDepartamento() {
         const empresa = document.getElementById("deletarDepartamentoNomeEmpresa").value
         const departamento = document.getElementById("deletarDepartamentoNome").value
+    
+        
     }
 
     static createFuncionarioDiv(funcionario) {
