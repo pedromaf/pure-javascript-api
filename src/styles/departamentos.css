@@ -69,15 +69,15 @@ h1 {
     row-gap: 30px;
 }
 
-.editarDepartamentos {
+.editarDepartamento {
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
-    justify-content: space-evenly;
+    row-gap: 40px;
+
 }
 
-.editarDepartamentos form {
+#editarDepartamentoDiv form {
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 25px;
 }
