@@ -138,11 +138,15 @@ class empresas {
 
     static async loadListaEmpresas(filter = null, simplified = false) {
         const listaEmpresas = document.getElementById("listaEmpresas")
-        const appliedFilter = document.getElementById("appliedFilter")
+        let appliedFilter = null
         let responseList
 
+        if(filter) {
+            appliedFilter = document.getElementById("appliedFilter")
+            appliedFilter.innerHTML = ""
+        }
+
         listaEmpresas.innerHTML = ""
-        appliedFilter.innerHTML = ""
 
         if (filter && filter != "Nenhum") {
             appliedFilter.innerHTML = "Setor: " + filter 
@@ -414,6 +418,9 @@ switch(document.title) {
         break
     case "Pesquisar Empresa":
         pesquisarEmpresaPageEventLoader()
-        break 
+        break
+    case "Dashboard Admin":
+        empresas.loadListaEmpresas(null, false)
+        break
     default:
 }

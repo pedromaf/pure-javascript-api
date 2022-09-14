@@ -335,6 +335,18 @@ export class Api {
         return usuarioId
     }
 
+    static async getAllDepartamentos() {
+        const url = this.baseUrl + "departments"
+
+        const response = await fetch(url, {
+            method: "GET",
+            headers: this.headers
+        })
+        .then(res => res.json())
+
+        return response
+    }
+
     static async contratarFuncionario(data, nomeUsuario) {
         const url = this.baseUrl + "departments/hire"
         let responseStatusCode
