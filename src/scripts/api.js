@@ -118,6 +118,28 @@ export class Api {
         return searchResult
     }
 
+    static async getEmpresaById(uuid) {
+        const listaEmpresas = await this.getListaEmpresas()
+        let searchResult = null
+
+        if(listaEmpresas) {
+            if(Array.isArray(listaEmpresas)) {
+                listaEmpresas.forEach(empresa => {
+                    if (empresa.uuid == uuid) {
+                        searchResult = empresa
+                    }
+                })
+            } else {
+                if (listaEmpresas.uuid == uuid) {
+                    return listaEmpresas
+                }
+            }
+        }
+
+        return searchResult
+    }
+
+
     static async getEmpresaIdByName(nomeEmpresa) {
         const empresa = await this.getEmpresaByName(nomeEmpresa)
 
@@ -495,6 +517,30 @@ export class Api {
         }
     }
 
+    static async editarUsuario(data, usuarioId) {
+        const url = this.baseUrl + "admin/update_user/" + usuarioId
+        let responseStatusCode
+
+        const response = await fetch(url,
+            {
+                method: "PATCH",
+                headers: this.headers,
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                responseStatusCode = res.status
+                return res
+            })
+        
+        if(responseStatusCode == 200) {
+            alert("Informações do usuário alteradas com sucesso.")
+        } else {
+            alert("Ocorreu um erro inesperado.")
+        }
+
+        return response
+    }
+
     static async deletarDepartamento(departamentoId) {
         const url = this.baseUrl + "departments/" + departamentoId
         let responseStatusCode 
@@ -513,5 +559,88 @@ export class Api {
         } else {
             return "Ocorreu um erro."
         }
+    }
+
+    static async deletarUsuario(usuarioId) {
+        const url = this.baseUrl + "admin/delete_user/" + usuarioId
+        let responseStatusCode 
+
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: this.headers
+        })
+        .then(res => {
+            responseStatusCode = res.status
+            return res
+        })
+
+        if (responseStatusCode == 204) {
+            return "Usuário deletado com sucesso."
+        } else {
+            return "Ocorreu um erro."
+        }
+    }
+
+    static async getColegasTrabalho() {
+        const url = this.baseUrl + "users/departments/coworkers"
+        let responseStatusCode
+        
+        const response = await fetch(url, {
+            method: "GET",
+            headers: this.headers
+        })
+        .then(res => res.json())
+
+        return response
+    }
+
+    static async getAllDepartamentosFromMinhaEmpresa() {
+        const url = this.baseUrl + "users/departments"
+
+        const response = await fetch(url, {
+            method: "GET",
+            headers: this.headers
+        })
+        .then(res => res.json())
+
+        return response
+    }
+
+    static async getDepartamentoById(departamentoId) {
+        const departamentos = this.getAllDepartamentosFromMinhaEmpresa()
+        let departamentoReturn = null
+
+        if (Array.isArray(departamentos)) {
+            if(departamentos.length > 0) {
+                departamentos.forEach(departamento => {
+                    if(departamento.uuid == departamentoId) {
+                        departamentoReturn = departamento
+                    }
+                })
+            }
+        } else {
+            if(departamentos.uuid == departamentoId) {
+                departamentoReturn = departamentos
+            }
+        }
+
+        return departamentoReturn
+    }
+
+    static async getMeuDepartamento() {
+        const url = this.baseUrl + "users/profile"
+
+        const response = await fetch(url, 
+            {
+                method: "GET",
+                headers: this.headers
+            })
+            .then(res => res.json())
+        
+        if(response.department_uuid) {
+            return this.getDepartamentoById(response.department_uuid)
+        }
+        
+        return null
     }
 }

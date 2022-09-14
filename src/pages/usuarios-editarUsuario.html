@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/darkmode.css">
-    <link rel="stylesheet" href="../styles/funcionarios.css">
-    <script src="../scripts/models/funcionarios.js" type="module" defer></script>
+    <link rel="stylesheet" href="../styles/empresas.css">
     <script src="../scripts/models/darkmode.js" type="module" defer></script>
     <script src="../scripts/models/logout.js" type="module" defer></script>
-    <title>Usuários Sem Departamento</title>
+    <script src="../scripts/models/usuarios.js" type="module" defer></script>
+    <title>Editar Usuário</title>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                 <li><a href="dashboardAdmin.html">Dashboard</a></li>
                 <li><a href="empresas.html">Empresas</a></li>
                 <li><a href="departamentos.html">Departamentos</a></li>
-                <li><a href="funcionarios.html">Funcionários</a></li>
+                <li><a href="funcionarios.html">Funcionarios</a></li>
                 <li><a href="usuarios.html">Usuários</a></li>
                 <div class="buttonsHeader">
                     <li><button id="logoutButton" type="button">Logout</button></li>
@@ -32,13 +32,17 @@
         </nav>
     </header>
 
-    <div id="pageContent" class="funcionariosSemDepartamento">
-        <h1>Gerenciar Funcionários</h1>
-
-        <h2>Usuários Sem Departamento</h2>
-        <div id="listaUsuariosDiv">
-
-        </div>
+    <div id="pageContent">
+        <h1>Gerenciar Usuários</h1>
+        
+        <h2>Editar Usuário</h2>
+        <form>
+            <input type="text" placeholder="Nome" id="editarUsuarioNome" name="editarUsuarioNome">
+            <input type="text" placeholder="Proficiência" id="editarUsuarioNivel" name="editarUsuarioNivel">
+            <input type="text" placeholder="Modalidade de trabalho" id="editarUsuarioKindWork" name="editarUsuarioKindWork">
+            
+            <button id="editarButton" type="button">Editar</button>
+        </form>
     </div>
 
     <footer>
