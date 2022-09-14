@@ -1,5 +1,5 @@
 .fieldsErrors {
-    color: red;
+    color: var(--erro);
 }
 
 
