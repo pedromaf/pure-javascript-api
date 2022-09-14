@@ -23,6 +23,10 @@ button {
     margin: 0 auto;
 }
 
+h2 {
+    text-decoration: underline;
+}
+
 select {
     width: 30%;
     border: 1px solid;
