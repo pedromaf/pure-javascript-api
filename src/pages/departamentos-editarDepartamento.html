@@ -8,8 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/darkmode.css">
     <link rel="stylesheet" href="../styles/departamentos.css">
     <script src="../scripts/models/logout.js" type="module" defer></script>
+    <script src="../scripts/models/darkmode.js" type="module" defer></script>
     <script src="../scripts/models/departamentos.js" type="module" defer></script>
     <title>Editar Departamento</title>
 </head>
@@ -41,17 +43,18 @@
 
                 <input type="text" id="editarDepartamentoNomeEmpresa" placeholder="Nome da Empresa"
                     name="editarDepartamentoNomeEmpresa">
-                
+
                 <input type="text" id="editarDepartamentoNome" placeholder="Nome do departamento"
                     name="editarDepartamentoNome">
 
                 <p>Nova descrição</p>
-                <input type="text" placeholder="Nova descrição" id="editarDepartamentoDescricao" name="editarDepartamentoDescricao">
+                <input type="text" placeholder="Nova descrição" id="editarDepartamentoDescricao"
+                    name="editarDepartamentoDescricao">
 
 
                 <button id="editarButton" type="button">Cadastrar</button>
             </form>
-    </div>
+        </div>
 
 </body>
 
