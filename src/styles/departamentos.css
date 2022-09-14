@@ -55,3 +55,15 @@ h1 {
     flex-direction: column;
     row-gap: 30px;
 }
+
+.pesquisarFuncionarios {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.pesquisarFuncionarios form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
