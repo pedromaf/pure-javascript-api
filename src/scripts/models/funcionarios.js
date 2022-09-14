@@ -81,6 +81,70 @@ class funcionarios {
         const response = await Api.contratarFuncionario(data, nomeUsuario)
         alert(response)
     }
+
+    static async demitirFuncionario() {
+        const nome = document.getElementById("demitirUsuarioName").value
+
+        if (nome == "") {
+            alert("O nome do funcionário não pode ser vazio.")
+            
+            return
+        }
+
+        const idFuncionario = await Api.getUsuarioIdByName(nome)
+        const response = await Api.demitirFuncionario(idFuncionario, nome)
+        
+        alert(response)
+    }
+
+    static createUsuarioDiv(usuario) {
+        const div = document.createElement("div")
+        const nome = document.createElement("p")
+        const email = document.createElement("p")
+        const nivel = document.createElement("p")
+        
+        const nomeLabel = document.createElement("label")
+        const emailLabel = document.createElement("label")
+        const nivelLabel = document.createElement("label")
+
+        div.Id = usuario.username + "ListaItemDiv"
+        nome.id = usuario.username + "Nome"
+        email.id = usuario.username + "Email"
+        nivel.id = usuario.username + "Nivel"
+
+        div.className = "listaUsuarioItem"
+        nome.innerHTML = "Usuário: " + usuario.username
+        email.innerHTML = "Email: " + usuario.email
+        nivel.innerHTML = "Proficiência: " + usuario.professional_level
+        
+        div.appendChild(nome)
+        div.appendChild(email)
+        div.appendChild(nivel)
+    
+        return div
+    }
+
+    static async listarUsuariosSemDepartamento() {
+        const listaDiv = document.getElementById("listaUsuariosDiv")
+        const response = await Api.getUsuariosSemDepartamento()
+
+        console.log(response)
+
+        if(Array.isArray(response)) {
+            if (response.length > 0) {
+                response.forEach(usuario => {
+                    listaDiv.appendChild(this.createUsuarioDiv(usuario))        
+                })
+            } else {
+                const p = document.createElement("p")
+                p.innerHTML = "Não há usuários sem departamento."
+                
+                listaDiv.appendChild(p)
+            }
+        } else {
+            listaDiv.appendChild(this.createUsuarioDiv(response))
+        }
+    }
 }
 
 function contratarFuncionarioPageEventLoader() {
@@ -90,6 +154,16 @@ function contratarFuncionarioPageEventLoader() {
         event.preventDefault()
 
         funcionarios.contratarFuncionario()
+    })
+}
+
+function demitirFuncionarioPageEventLoader() {
+    const demitirButton = document.getElementById("demitirButton")
+
+    demitirButton.addEventListener("click", event => {
+        event.preventDefault()
+
+        funcionarios.demitirFuncionario()
     })
 }
 
@@ -109,6 +183,12 @@ switch(document.title) {
         break
     case "Contratar Funcionário":
         contratarFuncionarioPageEventLoader()
+        break
+    case "Demitir Funcionário":
+        demitirFuncionarioPageEventLoader()
+        break
+    case "Usuários Sem Departamento":
+        funcionarios.listarUsuariosSemDepartamento()
         break
     default:
 }

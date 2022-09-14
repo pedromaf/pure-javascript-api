@@ -69,6 +69,7 @@ export class Api {
             .then(res => res.json())
         
         if (responseStatusCode == 201) {
+            alert("Cadastro realizado com sucesso.")
             window.location.assign("src/pages/login.html")
         }
 
@@ -138,7 +139,7 @@ export class Api {
             .then(res => {
                 if (res.status == 200) {
                     return res
-                } else {
+                } else {    
                     return null
                 }
             })
@@ -325,15 +326,40 @@ export class Api {
                 responseStatusCode = res.status
                 return res
             })
-            .then(res => res.json())
 
         switch (responseStatusCode) {
             case 200:
                 return "Usuário " + nomeUsuario + " contratado com sucesso."
             case 404:
-                return "Usuário " + nomeUsuario + " não encontrado"
+                return "Usuário " + nomeUsuario + " não encontrado."
             case 400:
                 return "O usuário " + nomeUsuario + " já está associado a um departamento."
+            default:
+                return "Ocorreu um erro ao processar a solicitação."
+        }
+    }
+
+    static async demitirFuncionario(idFuncionario, nomeUsuario) {
+        const url = this.baseUrl + "departments/dismiss/" + idFuncionario
+        let responseStatusCode
+
+        const response = await fetch(url,
+            {
+                method: "PATCH",
+                headers: this.headers
+            })
+            .then(res => {
+                responseStatusCode = res.status
+                return res
+            })
+        
+        switch (responseStatusCode) {
+            case 200:
+                return "Usuário " + nomeUsuario + " demitido com sucesso."
+            case 404:
+                return "Usuário " + nomeUsuario + " não encontrado."
+            case 400:
+                return "O usuário " + nomeUsuario + " não está associado a um departamento."
             default:
                 return "Ocorreu um erro ao processar a solicitação."
         }
@@ -356,6 +382,7 @@ export class Api {
             .then(res => res.json())
         
         if (responseStatusCode == 201) {
+            alert("Empresa cadastrada com sucesso.")
             window.location.assign("dashboardAdmin.html")
         }
 

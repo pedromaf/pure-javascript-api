@@ -115,6 +115,10 @@ class empresas {
 
         if (name) {
             response = await Api.getEmpresaByName(name)
+        } else {
+            alert("Digite o nome da empresa para fazer a pesquisa.")
+            
+            return
         }
 
         if(!response) {
@@ -140,11 +144,12 @@ class empresas {
         listaEmpresas.innerHTML = ""
         appliedFilter.innerHTML = ""
 
-        if (filter) {
+        if (filter && filter != "Nenhum") {
             appliedFilter.innerHTML = "Setor: " + filter 
+            responseList = await Api.getListaEmpresas(filter)
+        } else {
+            responseList = await Api.getListaEmpresas()
         }
-        
-        responseList = await Api.getListaEmpresas(filter)
         
         if (responseList == null) {
             listaEmpresas.innerHTML = "Ocorreu um erro ao carregar a lista de empresas."
@@ -167,19 +172,59 @@ class empresas {
         }
     }
 
+    static async populateSetorSelect() {
+        const select = document.getElementById("setorSelect")
+        const listaSetores = await Api.getSetores()
+        let option
+
+        option = document.createElement("option")
+        option.value = "Nenhum"
+        option.innerHTML = "Nenhum"
+
+        select.appendChild(option)
+
+        if (Array.isArray(listaSetores)) {
+            if (listaSetores.length > 0) {
+                listaSetores.forEach(setor => {
+                    option = document.createElement("option")
+                    option.value = setor.description
+                    option.innerHTML = setor.description
+
+                    select.appendChild(option)
+                })
+            }
+        } else {
+            option = document.createElement("option")
+            option.value = listaSetores.description
+            option.innerHTML = listaSetores.description
+
+            select.appendChild(option)
+        }
+    }
+
     static async cadastrarEmpresa() {
         const nome = document.getElementById("cadastroEmpresaNome").value
         const descricao = document.getElementById("cadastroEmpresaDescricao").value
         const horaAbertura = document.getElementById("cadastroEmpresaHoraAbertura").value
-        const setorDescription = document.getElementById("cadastroEmpresaSetor").value
+        const setor = document.getElementById("setorSelect").value
         const errorMsgList = document.getElementById("errorMsgList")
-        const responseSectorId = await Api.getSetorId(setorDescription)
+        const responseSetorId = await Api.getSetorId(setor)
+
+        if(nome == "" || descricao == "" || horaAbertura == "" || setor == "") {
+            alert("Todos os campos devem ser preenchidos.")
+
+            return
+        }
+
+        if (!responseSetorId) {
+            alert("O setor " + setor + " não está cadastrado na plataforma.")
+        }
 
         const data = {
             name: nome,
             description: descricao,
             opening_hours: horaAbertura,
-            sector_uuid: responseSectorId
+            sector_uuid: responseSetorId
         }
         
         const responseCreation = await Api.cadastrarEmpresa(data)
@@ -294,16 +339,35 @@ function loadCarrosselButtonEvents(empresaDiv) {
     })
 }
 
-function homePageEventLoader() {
+function setorFilterEventLoader() {
     const filterButton = document.getElementById("filterButton")
     const clearFilterButton = document.getElementById("clearFilterButton")
 
     filterButton.addEventListener("click", (event) => {
         event.preventDefault()
 
-        const filterField = document.getElementById("filterSector")
+        const filter = document.getElementById("setorSelect").value
 
-        empresas.loadListaEmpresas(filterField.value, true)
+        empresas.loadListaEmpresas(filter)
+    })
+
+    clearFilterButton.addEventListener("click", (event) => {
+        event.preventDefault()
+
+        empresas.loadListaEmpresas()
+    })
+}
+
+function homeSetorFilterEventLoader() {
+    const filterButton = document.getElementById("filterButton")
+    const clearFilterButton = document.getElementById("clearFilterButton")
+
+    filterButton.addEventListener("click", (event) => {
+        event.preventDefault()
+
+        const filter = document.getElementById("filterSector").value
+
+        empresas.loadListaEmpresas(filter, true)
     })
 
     clearFilterButton.addEventListener("click", (event) => {
@@ -318,7 +382,7 @@ function cadastrarEmpresaPageEventLoader() {
 
     cadastroButton.addEventListener("click", async (event) => {
         event.preventDefault()
-
+        
         empresas.cadastrarEmpresa()
     })
 }
@@ -337,13 +401,15 @@ function pesquisarEmpresaPageEventLoader() {
 switch(document.title) {
     case "Home":
         empresas.loadListaEmpresas(null, true)
-        homePageEventLoader()
+        homeSetorFilterEventLoader()
         break
     case "Listar Empresas":
         empresas.loadListaEmpresas(null)
-        homePageEventLoader()
+        empresas.populateSetorSelect()
+        setorFilterEventLoader()
         break
     case "Cadastrar Empresa":
+        empresas.populateSetorSelect()
         cadastrarEmpresaPageEventLoader()
         break
     case "Pesquisar Empresa":

@@ -9,6 +9,18 @@ class departamentos {
         const errorMsgList = document.getElementById("errorMsgList")
         const empresaId = await Api.getEmpresaIdByName(nomeEmpresa)
 
+        if (nomeDepartamento == "" || descricaoDepartamento == "" || nomeEmpresa == "") {
+            alert("Todos os campos devem ser preenchidos.")
+
+            return
+        }
+
+        if (!empresaId) {
+            alert("A empresa " + nomeEmpresa + " não está cadastrada.")
+
+            return
+        }
+
         const data = {
             name: nomeDepartamento,
             description: descricaoDepartamento,
