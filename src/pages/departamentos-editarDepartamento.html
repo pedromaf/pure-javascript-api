@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../styles/departamentos.css">
     <script src="../scripts/models/logout.js" type="module" defer></script>
     <script src="../scripts/models/departamentos.js" type="module" defer></script>
-    <title>Cadastrar Departamento</title>
+    <title>Editar Departamento</title>
 </head>
 
 <body>
@@ -30,28 +30,28 @@
         </nav>
     </header>
 
-    <div id="pageContent" class="cadastrarDepartamento">
+    <div id="pageContent" class="">
         <h1>Gerenciar Departamentos</h1>
 
-        <h2>Cadastrar Departamento</h2>
-        <div id="cadastroDepartamentoDiv">
+        <h2>Editar Departamento</h2>
+        <div id="editarDepartamentoDiv">
             <form>
                 <div id="errorMsgList" class="fieldsErrors">
                 </div>
 
-                <input type="text" id="cadastroDepartamentoNome" placeholder="Nome do departamento"
-                    name="cadastroDepartamentoNome">
+                <input type="text" id="editarDepartamentoNomeEmpresa" placeholder="Nome da Empresa"
+                    name="editarDepartamentoNomeEmpresa">
+                
+                <input type="text" id="editarDepartamentoNome" placeholder="Nome do departamento"
+                    name="editarDepartamentoNome">
+
+                <p>Nova descrição</p>
+                <input type="text" placeholder="Nova descrição" id="editarDepartamentoDescricao" name="editarDepartamentoDescricao">
 
 
-                <input type="text" placeholder="Descrição" id="cadastroDepartamentoDescricao" name="cadastroDepartamentoDescricao">
-
-
-                <input type="text" id="cadastroDepartamentoNomeEmpresa" placeholder="Nome da Empresa"
-                    name="cadastroDepartamentoNomeEmpresa">
-
-                <button id="cadastroButton" type="button">Cadastrar</button>
+                <button id="editarButton" type="button">Cadastrar</button>
             </form>
-
+    </div>
 
 </body>
 

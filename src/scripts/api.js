@@ -435,4 +435,33 @@ export class Api {
 
         return response
     }
+
+    static async editarDepartamento(data, departamentoId) {
+        const url = this.baseUrl + "departments/" + departamentoId
+        let responseStatusCode
+
+        const response = await fetch(url,
+            {
+                method: "PATCH",
+                headers: this.headers,
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                responseStatusCode = res.status
+                return res
+            })
+        
+        switch(responseStatusCode) {
+            case 200:
+                return "Departamento editado com sucesso."
+            case 404:
+                return "Departamento não encontrado."
+            case 401:
+                return "Você não tem permissão para editar departamentos."
+            case 400:
+                return "Ocorreu um erro. Informações inválidas (400 Bad Request)."
+                default:
+                return "Ocorreu um erro inesperado."
+        }
+    }
 }
